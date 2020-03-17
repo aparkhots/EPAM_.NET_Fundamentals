@@ -24,22 +24,27 @@ namespace Exam1
         }
         public static void MyChange(int a)
         {
-            List<char> zerone = new List<char>();//список 0 и 1
-            int i = 0;
-            do
+            if(a==0)Console.Write("My method: 0");
+            if(a==1)Console.Write("My method: 1");
+            if(a>1)
             {
-                if (a % 2 == 0) zerone.Insert(i, '0');
-                else zerone.Insert(i, '1');
-                a /= 2;
-                i++;
-            }
-            while (a != 1);
-            zerone.Insert(i, '1');
-            zerone.Reverse();
-            Console.Write("My method: ");
-            for (int j=0; j<=i;j++)
-            {
-                Console.Write(zerone[j]);
+                List<char> zerone = new List<char>();//список 0 и 1
+                int i = 0;
+                do
+                {
+                    if (a % 2 == 0) zerone.Insert(i, '0');
+                    else zerone.Insert(i, '1');
+                    a /= 2;
+                    i++;
+                }
+                while (a != 1);
+                zerone.Insert(i, '1');
+                zerone.Reverse();
+                Console.Write("My method: ");
+                for (int j=0; j<=i;j++)
+                {
+                    Console.Write(zerone[j]);
+                }
             }
         }
     }
