@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Exam1
@@ -15,37 +15,34 @@ namespace Exam1
             Console.ReadKey();
         }
     }
-    class Sys2 //класс перевода в двоичную систему
-    {
+    public class Sys2
+    { 
         public static void Change(int a)
         {
             string str=Convert.ToString(a, 2);
-            Console.WriteLine("Standard method: {0}", str);
+            Console.WriteLine(str);
         }
         public static void MyChange(int a)
         {
-            if(a==0)Console.Write("My method: 0");
-            if(a==1)Console.Write("My method: 1");
-            if(a>1)
+            string str1 = "1";
+            if(a==0) str1 = "0"; 
             {
-                List<char> zerone = new List<char>();//список 0 и 1
+                List<char> zerone = new List<char>();
                 int i = 0;
-                do
+                while (a != 1)
                 {
-                    if (a % 2 == 0) zerone.Insert(i, '0');
-                    else zerone.Insert(i, '1');
+                    if (a % 2 == 0) zerone.Add('0');
+                    else zerone.Add('1');
                     a /= 2;
                     i++;
                 }
-                while (a != 1);
-                zerone.Insert(i, '1');
                 zerone.Reverse();
-                Console.Write("My method: ");
-                for (int j=0; j<=i;j++)
+                for (int j = 0; j < i; j++)
                 {
-                    Console.Write(zerone[j]);
+                    str1 += zerone[j];
                 }
             }
+            Console.Write("My method: {0}", str1);
         }
     }
 }
