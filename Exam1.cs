@@ -15,7 +15,7 @@ namespace Exam1
             Console.ReadKey();
         }
     }
-    public class Sys2
+    class Sys2
     { 
         public static void Change(int a)
         {
