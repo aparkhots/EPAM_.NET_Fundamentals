@@ -7,39 +7,37 @@ namespace Exam1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter your number: ");
-            int changeNum = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Number {0} in 2system is ", changeNum);
-            Sys2.Change(changeNum);
-            Sys2.MyChange(changeNum);
-            Console.ReadKey();
-        }
-    }
+               Console.WriteLine("Enter your number: ");
+               int changeNum = Convert.ToInt32(Console.ReadLine());
+               Console.WriteLine("Number {0} in 2system is ", changeNum);
+               Sys2.Change(changeNum);
+               Sys2.MyChange(changeNum);
+               Console.ReadKey();
+           }
+       }
     class Sys2
-    { 
+    {
         public static void Change(int a)
         {
-            string str=Convert.ToString(a, 2);
+            string str = Convert.ToString(a, 2);
             Console.WriteLine(str);
         }
         public static void MyChange(int a)
         {
             string str1 = "1";
-            if(a==0) str1 = "0"; 
+            if (a == 0) str1 = "0";
+            if (a > 1)
             {
-                List<char> zerone = new List<char>();
-                int i = 0;
+                string str2 = "";
                 while (a != 1)
                 {
-                    if (a % 2 == 0) zerone.Add('0');
-                    else zerone.Add('1');
+                    if (a % 2 == 0) str2 += 0;
+                    else str2 += 1;
                     a /= 2;
-                    i++;
                 }
-                zerone.Reverse();
-                for (int j = 0; j < i; j++)
+                for (int j = str2.Length - 1; j >= 0; j--)
                 {
-                    str1 += zerone[j];
+                    str1 += str2[j];
                 }
             }
             Console.Write("My method: {0}", str1);
