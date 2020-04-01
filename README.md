@@ -1,4 +1,4 @@
 # EPAM_.NET_Fundamentals
 My LAB and Exam works
 
-last update: upload lab 1-4, exam 1
+last update: upload Exam1_GoogleForms.cs - последний срез(черезGooge формы)
