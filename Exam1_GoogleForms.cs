@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Exam1_GoogleForms
@@ -10,45 +11,56 @@ namespace Exam1_GoogleForms
             char[] del1 = new char[] { ',', ' ' };
             string arr;
             int i = 0;
+            List<string> pairXY = new List<string>();
             Console.WriteLine("How read coordinates? Cosole(c) or file(f)?");
             char coor = Convert.ToChar(Console.ReadLine());
             if (coor == 'c')
             {
-                Console.WriteLine("Count of pairs: ");
-                int n = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter array: ");
                 arr =Convert.ToString(Console.ReadLine());
-                
-                string[] pairXY = new string[n * 2];
                 foreach (string pairs in arr.Split(del1))
                 {
-                    pairXY[i] = pairs;
+                    pairXY.Add(pairs);
                     i++;
                 }
                 Show(pairXY);
                 Correct(pairXY);
+                Console.WriteLine("After changes: ");
                 Show(pairXY);
             }
             if (coor == 'f')
             {
                 string path = @"text.txt";
                 string path2 = @"text2.txt";
-                arr=File.ReadAllText(path);
-                string[] pairXY = new string[arr.Length];
+                try
+                {
+                    FileStream Creater = new FileStream(path, FileMode.Open);
+                    Creater.Close();
+                }
+                catch(FileNotFoundException)
+                {
+                    StreamWriter Creater = new StreamWriter(path);
+                    Console.WriteLine("Write coordinats: ");
+                    string str = Console.ReadLine();
+                    Creater.Write(str);
+                    Creater.Close();
+                }
+                arr=File.ReadAllText(path); 
                 StreamWriter file2 = new StreamWriter(path2);
                 foreach (string pairs in arr.Split(del1))
                 {
-                    pairXY[i] = pairs;
-                    if (i % 2 == 0) file2.Write($"X: {pairXY[i]}, ");
-                    else file2.Write($"Y: {pairXY[i]}\n");
+                    pairXY.Add(pairs);
+                    if (i % 2 == 0) file2.Write($"X: {pairs}, ");
+                    else file2.Write($"Y: {pairs}\n");
                     i++;
                 }
                 Correct(pairXY);
                 Saving(pairXY, file2);
+                file2.Close();
             }
         }
 
-        public static void Show(string[] XY)
+        public static void Show(List<string> XY)
         {
             int j = 0;
             foreach (string numers in XY)
@@ -61,37 +73,44 @@ namespace Exam1_GoogleForms
                 j++;
             }
         }
-        public static void Correct(string[] XY)
+
+        public static void Correct(List<string> XY)
         {
             Console.WriteLine("Do you want to correct? yes/no: ");
             string s = Console.ReadLine();
             if (s == "yes")
             {
-                Console.WriteLine("Сhoose pair: ");
-                int k = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Change X: ");
-                XY[(k * 2) - 2] = Console.ReadLine();
-                Console.WriteLine("Сhange Y: ");
-                XY[(k * 2) - 1] = Console.ReadLine();
+                try
+                {
+                    Console.WriteLine("Сhoose pair: ");
+                    int k = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Change X: ");
+                    XY[(2 * k) - 2] = Console.ReadLine();
+                    Console.WriteLine("Сhange Y: ");
+                    XY[(k * 2) - 1] = Console.ReadLine();
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Wrong symbols or your pair is not available");
+                }
             }
             if (s == "no")
             {
                 Console.WriteLine("That's all");
             }
         }
-        public static void Saving(string[] XY, StreamWriter file)
+
+        public static void Saving(List<string> XY, StreamWriter file)
         {
+            file.WriteLine("After changes: ");
             int k = 0;
             foreach (string pairs in XY)
             {
-                XY[k] = pairs;
-                if (k % 2 == 0) file.Write($"X: {XY[k]}, ");
-                else file.Write($"Y: {XY[k]}\n");
+                if (k % 2 == 0) file.Write($"X: {pairs} ");
+                else file.Write($"Y: {pairs}\n");
                 k++;
             }
-            file.Close();
         }
     }
 }
             //23.8976,12.3218 25.76,11.9463 24.8293,12.2
-
