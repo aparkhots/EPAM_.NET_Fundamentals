@@ -1,20 +1,18 @@
-﻿using System;
+using System;
 
-namespace lab_1_4_
+namespace lab1
 {
     class Program
     {
         static void Main(string[] args)
         {
-            /////// Variant 12 ///////
-
-            Console.WriteLine("Variant 12\n Choose task(1,2,3 or 4): ");
+            Console.WriteLine("Variant 12\nChoose task(1-4): ");
             int task = Convert.ToInt32(Console.ReadLine());
             switch (task)
             {
                 case 1:
                     ////////// task 1 //////
-                    ///
+
                     Console.WriteLine("Enter a: ");
                     int num1 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Enter b: ");
@@ -25,26 +23,26 @@ namespace lab_1_4_
 
                 case 2:
                     ////////// task 2 ///////факториал
-                    ///
+
                     Console.WriteLine("Enter count of term: ");
                     int n = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Enter variable x: ");
                     int x = Convert.ToInt32(Console.ReadLine());
-                    double result,count;
-                    result = count = 1;
+                    double result = 1;
+                    double count = 1;
                     for (int j = 0; j < n; j++)
                     {
                         count *= (Math.Pow(2 * x, 2) / (((2 * j) + 1) * ((2 * j) + 2)));//рекуррентный метод
                         if (j % 2 == 0) result -= count;
                         else result += count;
                     }
-                    Console.WriteLine("Сумма ряда равна: {0}", result);
+                    Console.Write(result);
                     Console.ReadKey();
                     break;
 
                 case 3:
                     ////////// task 3 ///////
-                    ///
+
                     float a = -4.5f;
                     float b = -3.5f;
                     float c;
@@ -71,21 +69,26 @@ namespace lab_1_4_
                     //////////task4/////////
 
                     Console.WriteLine("Enter x: ");
-                    double x2 = Convert.ToDouble(Console.ReadLine());// ввод х
+                    float x2 = (float)Convert.ToDouble(Console.ReadLine());// ввод х
                     Console.WriteLine("Enter epsilon: ");
-                    double epsilon = Convert.ToDouble(Console.ReadLine());// ввод суммы epsilon, до которой будем считать
+                    float epsilon = (float)Convert.ToDouble(Console.ReadLine());// epsilon, меньше которого выражение быть не может
                     int myFact, i;
-                    myFact = i = 1;
+                    myFact = 1;
+                    i = 1;
                     double sum = 1;
-                    while (sum <= epsilon)
+                    bool flag = true;
+                    while (flag)
                     {
-                        myFact *= i;
-                        sum += Math.Cos(i * x2) / myFact;
-                        Console.WriteLine("{0}, {1}, {2}\v", myFact, Math.Cos(i * x2), sum);
-                        i++;
-                        if (i == 5) break;
+                        if (((float)(Math.Cos(i * x2) / myFact)) > epsilon)
+                        { 
+                            sum += Math.Cos(i * x2) / myFact;
+                            Console.WriteLine("{0}", Math.Cos(i * x2) / myFact);
+                            Console.WriteLine("{0}, {1}, {2}\v", myFact, Math.Cos(i * x2), sum);
+                            i++;
+                            myFact *= i;
+                        }
+                        else flag = false;
                     }
-                    Console.WriteLine("Сумма больше уже не будет");
                     break;
             }
             Console.ReadKey();
